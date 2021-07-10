@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width= device-width, initial-scale=1.0">
+    <title>Quiz on Stream | Filtros</title>
+    <link rel="stylesheet" href="../css/filters.css">
+</head>
+<body id="body">
+    <div id="page-container">
+        <header id="header">
+            <div id="header-title">
+                <h1 id="h1">QUIZ<span id="span-on">ON</span>STREAM</h1>  
+            </div>
+        </header>
+
+        <div id="main-container">
+            <main id="main">
+
+                <span class="decoration" id="top-left"></span>
+                <span class="decoration" id="top-right"></span>
+                <span class="decoration" id="bottom-left"></span>
+                <span class="decoration" id="bottom-right"></span>
+                <div id="decoration-box"></div>
+
+                <section id="instructions-chat-section">
+                    <h2 class="h2">Como jogar?</h2>
+                    <h2 class="h2" id="chat-owner">Chat de Wcalixtoo:</h2>
+                    <div class="grid-item">
+                        <p class="p">Cada pergunta tem 4 alternativas: A, B, C e D. Basta digitar no chat uma dessas 4 letras para marcar a opção
+                        correspondente. OBS: depois de escolher uma opção, não é possível desfazer. A cada nova questão o chat pode marcar uma opção. </p>
+                    </div>
+                    <div id="chat-messages-div" class="grid-item">
+                        <ul id="latest-messages">
+                            <li>Femeuc: Olá, boa tarde! Desculpa pela demora.</li>
+                            <li>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Qui dicta harum voluptates, ducimus tempore e</li>
+                            <li>Cibitto: arum necessitatibus maxime, </li>
+                            <li>Femeuc: maiores ut blanditiis fugit quia dolor enim. Perferendis, autem! Natus sapiente inventore asperiores?</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section>
+                    <h2 class="h2">Preferências</h2>
+                    <div >
+                        <div class="filter-div">
+                            <div class="filter-div-item">
+                                <h3>Abrangência</h3>
+                            </div>
+                            <div class="filter-div-item">
+                                <input type="checkbox" id="theme3" name="theme3" value="general" onchange="handleInputsChange()">
+                                <label for="theme3">Conhecimentos Gerais</label> &nbsp; &nbsp;
+                                <input type="checkbox" id="theme4" name="theme4" value="especific" onchange="handleInputsChange()">
+                                <label for="theme4">Assuntos específicos desse canal</label>
+                            </div>
+                        </div>
+        
+                        <div class="filter-div" id="conhecimentos-gerais">
+                            <div class="filter-div-item">
+                                <h3>Conhecimentos Gerais</h3>
+                            </div>
+                            <div class="filter-div-item">
+                                <input type="checkbox" id="theme1" name="theme1" value="Conhecimentos Gerais">
+                                <label for="theme1">Gramática</label> &nbsp; &nbsp;
+                                <input type="checkbox" id="theme1" name="theme1" value="Conhecimentos Gerais">
+                                <label for="theme1">Literatura</label> &nbsp; &nbsp;
+                                <input type="checkbox" id="theme1" name="theme1" value="Conhecimentos Gerais">
+                                <label for="theme1">Inglês</label> &nbsp; &nbsp;
+                                <input type="checkbox" id="theme1" name="theme1" value="Conhecimentos Gerais">
+                                <label for="theme1">Espanhol</label> &nbsp; &nbsp;
+                                <input type="checkbox" id="theme1" name="theme1" value="Conhecimentos Gerais">
+                                <label for="theme1">Matemática</label> &nbsp; &nbsp;
+                                <input type="checkbox" id="theme1" name="theme1" value="Conhecimentos Gerais">
+                                <label for="theme1">Geografia</label> &nbsp; &nbsp;
+                                <input type="checkbox" id="theme1" name="theme1" value="Conhecimentos Gerais">
+                                <label for="theme1">História</label> &nbsp; &nbsp;
+                                <input type="checkbox" id="theme1" name="theme1" value="Conhecimentos Gerais">
+                                <label for="theme1">Biologia</label> &nbsp; &nbsp;
+                                <input type="checkbox" id="theme1" name="theme1" value="Conhecimentos Gerais">
+                                <label for="theme1">Física</label> &nbsp; &nbsp;
+                                <input type="checkbox" id="theme1" name="theme1" value="Conhecimentos Gerais">
+                                <label for="theme1">Química</label> &nbsp; &nbsp;
+                                
+                            </div>
+                        </div>
+        
+                        <div class="filter-div" id="temas-especificos">
+                            <div class="filter-div-item">
+                                <h3>Temas Desse Canal</h3>
+                            </div>
+                            <div class="filter-div-item">
+                                <input type="checkbox" id="theme1" name="theme1" value="Conhecimentos Gerais">
+                                <label for="theme1">Brawl Stars</label> &nbsp; &nbsp;
+                                <input type="checkbox" id="theme1" name="theme1" value="Conhecimentos Gerais">
+                                <label for="theme1">Gartic</label> &nbsp; &nbsp;
+                                <input type="checkbox" id="theme1" name="theme1" value="Conhecimentos Gerais">
+                                <label for="theme1">Rocket League</label> &nbsp; &nbsp;
+                                <input type="checkbox" id="theme1" name="theme1" value="Conhecimentos Gerais">
+                                <label for="theme1">Outros</label> &nbsp; &nbsp;
+                            </div>
+                        </div>
+        
+                        <div class="filter-div" id="tempo">
+                            <div class="filter-div-item">
+                                <h3>Tempo</h3>
+                            </div>
+                            <div class="filter-div-item">
+                                <input type="radio" id="dinamico" name="tempo" value="dinamico" checked onchange="handleInputsChange()">
+                                <label for="html">Dinâmico</label> &nbsp; &nbsp;
+                                <input type="radio" id="predefinido" name="tempo" value="predefinido" onchange="handleInputsChange()">
+                                <label for="html">Pré-definido</label> &nbsp; &nbsp;
+                                <div id="how-much-time">
+                                    <label for="quantity">Quantos segundos?</label>
+                                    <input type="number" id="quantity" name="quantity" max="120">
+                                </div>
+                            </div>
+                        </div>
+        
+                        <div class="filter-div" id="dificuldade">
+                            <div class="filter-div-item">
+                                <h3>Dificuldade</h3>
+                            </div>
+                            <div class="filter-div-item">
+                                <input type="checkbox" id="theme1" name="theme1" value="Conhecimentos Gerais">
+                                <label for="theme1">Fácil</label> &nbsp; &nbsp;
+                                <input type="checkbox" id="theme1" name="theme1" value="Conhecimentos Gerais">
+                                <label for="theme1">Normal</label> &nbsp; &nbsp;
+                                <input type="checkbox" id="theme1" name="theme1" value="Conhecimentos Gerais">
+                                <label for="theme1">Difícil</label> &nbsp; &nbsp;
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>>
+
+    <footer>
+
+    </footer>
+</body>
+</html>

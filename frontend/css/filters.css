@@ -7,7 +7,7 @@
 }
 
 #body {
-    background-image: url('../layout/layout_2.png');
+    background-image: url('../layout/fundo_2.png');
     background-size: cover;
 }
 
@@ -50,38 +50,71 @@
     box-shadow:  rgb(0, 50, 150) 0px 30px;
 }
 
-#main #login-section {
+#main section {
     background-color: rgb(0, 47, 142);
     text-align: center;
     padding: 20px 20px;
     border-radius: 5%;
-    margin: 30px auto 30px auto;
+    margin: 30px auto 50px auto;
     box-shadow: rgb(0 40 122) 0px 30px; 
 }
-
 #main .h2 {
     color: rgb(255, 232, 118);
-    font-size: 40px;
-    margin-bottom: 30px;
+    font-size: 25px;
     text-shadow: rgb(0, 0, 0) 0px 4px;
     font-family: monospace;
 }
-
 #main .p {
     color: white;
-    font-size: 30px;
+    font-size: 20px;
     margin-bottom: 30px;
     text-shadow: rgb(0, 0, 0) 0px 4px;
-    word-spacing: 1ch;
     font-family: monospace;
+    text-align: left;
+    padding: 10px;
 }
 
-#main #username-input {
-    background: rgb(145, 218, 255);
+#main #instructions-chat-section {
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+#main #chat-messages-div {
+    display: flex;
+    overflow: hidden;
+    background-color: rgb(0, 40, 122);
+}
+#main #latest-messages {
+    color: white;
+    list-style-type: none;
+    text-align: left;
     padding: 10px;
-    text-align: center;
     font-size: 20px;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px;
+    font-family: monospace;
+    flex-grow: 1;
+    height: 0;
+}
+#main #latest-messages li {
+    margin-bottom: 5px;
+}
+
+#main .filter-div {
+    display: grid;
+    grid-template-columns: 25% 75%;
+}
+#main .filter-div-item{
+    color: white;
+    margin-top: 20px;
+    padding: 5px;
+    font-size: 20px;
+}
+
+#main #how-much-time {
+    display: inline;
+}
+#main input#quantity {
+    width: 60px;
+    text-align: center;
+    padding: 2px 10px;
 }
 
 /* Main: decoration */
@@ -112,29 +145,12 @@
     right: 20px;
     bottom: 20px;
 }
-
 #main #decoration-box {
     border: rgba(0, 0, 0, .1) 3px solid;
-    width: 94%;
-    height: 88%;
+    width: 93%;
+    height: 92%;
     position: absolute;
-    top: 6%;
+    top: 4%;
     left: 3%;
     z-index: -1;
-}
-
-#main #login-button {
-    width: fit-content;
-    height: fit-content;
-    font-size: 20px;
-    padding: 9px 16px;
-    background-color: rgb(56, 188, 61);;
-    text-align: center;
-    box-shadow: rgb(24 136 20) 0px 5px;
-    border-radius: 55%;
-    border: none;
-    color: white;
-    font-weight: 900;
-    margin-left: 10px;
-    cursor: pointer;
 }

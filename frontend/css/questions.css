@@ -7,8 +7,9 @@
 }
 
 #body {
-    background-image: url('../layout/fundo_1.png');
+    background-image: url('../layout/fundo_2.png');
     background-size: cover;
+    background-attachment: fixed;
 }
 
 /* Page Container */
@@ -154,16 +155,73 @@
     margin-left: 10px;
 }
 
-#main #stop-button {
+#main .button {
     font-size: 20px;
     padding: 9px 16px;
-    background-color: #ffe876;
-    text-align: center;
-    box-shadow: #b6a655 0px 5px;
     border-radius: 5%;
     border: none;
-    color: black;
     font-weight: 900;
     margin-top: 20px;
     cursor: pointer;
+}
+
+#main #stop-button {
+    background-color: #ffe876;
+    box-shadow: #b6a655 0px 5px;
+    color: black;
+}
+#main #end-quiz-button {
+    background-color: #ffe876;
+    box-shadow: #b6a655 0px 5px;
+    color: black;
+    width:fit-content;
+    margin-right: auto;
+}
+#main #next-question-button {
+    background-color: #ffe876;
+    box-shadow: #b6a655 0px 5px;
+    color: black;
+    width: fit-content;
+}
+#main #buttons {
+    display: flex;
+    flex-direction: row;
+}
+
+/* Main: decoration */
+#main .decoration {
+    width: 30px;
+    height: 30px;
+    background-color: rgb(165, 170, 170);
+    border-radius: 50%;
+    position: absolute;
+    box-shadow: rgb(115, 115, 115) 0px 5px;
+}
+#main #top-left {
+    left: 20px;
+    top: 20px;
+}
+
+#main #top-right {
+    right: 20px;
+    top: 20px;
+}
+
+#main #bottom-left {
+    left: 20px;
+    bottom: 20px;
+}
+
+#main #bottom-right {
+    right: 20px;
+    bottom: 20px;
+}
+#main #decoration-box {
+    border: rgba(0, 0, 0, .1) 3px solid;
+    width: 93%;
+    height: 94%;
+    position: absolute;
+    top: 3%;
+    left: 3%;
+    z-index: -1;
 }

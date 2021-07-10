@@ -52,7 +52,6 @@
 
 #main section {
     background-color: rgb(0, 47, 142);
-    text-align: center;
     padding: 20px 20px;
     border-radius: 5%;
     margin: 30px auto 50px auto;
@@ -63,6 +62,7 @@
     font-size: 25px;
     text-shadow: rgb(0, 0, 0) 0px 4px;
     font-family: monospace;
+    text-align: center;
 }
 #main .p {
     color: white;
@@ -81,7 +81,7 @@
 #main #chat-messages-div {
     display: flex;
     overflow: hidden;
-    background-color: rgb(0, 40, 122);
+    background-color: rgb(0, 33, 100);
 }
 #main #latest-messages {
     color: white;
@@ -107,9 +107,15 @@
     padding: 5px;
     font-size: 20px;
 }
-
-#main #how-much-time {
-    display: inline;
+#main .filter-div-item h3 {
+    text-align: center;
+}
+#main .filter-input-block {
+    display: inline-block;
+    margin-right: 10px;
+}
+#main #general-matters, #main #specific-matters, #main #how-much-time {
+    display: none;
 }
 #main input#quantity {
     width: 60px;
@@ -153,4 +159,19 @@
     top: 4%;
     left: 3%;
     z-index: -1;
+}
+
+#main #button-div {text-align: center;}
+#main #start-button {
+    font-size: 20px;
+    padding: 9px 16px;
+    background-color: rgb(56, 188, 61);;
+    text-align: center;
+    box-shadow: rgb(24 136 20) 0px 5px;
+    border-radius: 5%;
+    border: none;
+    color: white;
+    font-weight: 900;
+    cursor: pointer;
+    margin-top: 20px;
 }

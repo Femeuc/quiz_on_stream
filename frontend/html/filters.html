@@ -43,61 +43,93 @@
 
                 <section>
                     <h2 class="h2">Preferências</h2>
-                    <div >
+                    <div id="filters-container">
                         <div class="filter-div">
                             <div class="filter-div-item">
                                 <h3>Abrangência</h3>
                             </div>
                             <div class="filter-div-item">
-                                <input type="checkbox" id="theme3" name="theme3" value="general" onchange="handleInputsChange()">
-                                <label for="theme3">Conhecimentos Gerais</label> &nbsp; &nbsp;
-                                <input type="checkbox" id="theme4" name="theme4" value="especific" onchange="handleInputsChange()">
-                                <label for="theme4">Assuntos específicos desse canal</label>
+                                <div class="filter-input-block">
+                                    <input type="checkbox" id="theme3" name="theme3" value="general" onchange="handleInputsChange()">
+                                    <label for="theme3">Conhecimentos Gerais</label> 
+                                </div>
+                                <div class="filter-input-block">
+                                    <input type="checkbox" id="theme4" name="theme4" value="especific" onchange="handleInputsChange()">
+                                    <label for="theme4">Assuntos específicos desse canal</label>
+                                </div>
                             </div>
                         </div>
         
-                        <div class="filter-div" id="conhecimentos-gerais">
+                        <div class="filter-div" id="general-matters">
                             <div class="filter-div-item">
                                 <h3>Conhecimentos Gerais</h3>
                             </div>
                             <div class="filter-div-item">
-                                <input type="checkbox" id="theme1" name="theme1" value="Conhecimentos Gerais">
-                                <label for="theme1">Gramática</label> &nbsp; &nbsp;
-                                <input type="checkbox" id="theme1" name="theme1" value="Conhecimentos Gerais">
-                                <label for="theme1">Literatura</label> &nbsp; &nbsp;
-                                <input type="checkbox" id="theme1" name="theme1" value="Conhecimentos Gerais">
-                                <label for="theme1">Inglês</label> &nbsp; &nbsp;
-                                <input type="checkbox" id="theme1" name="theme1" value="Conhecimentos Gerais">
-                                <label for="theme1">Espanhol</label> &nbsp; &nbsp;
-                                <input type="checkbox" id="theme1" name="theme1" value="Conhecimentos Gerais">
-                                <label for="theme1">Matemática</label> &nbsp; &nbsp;
-                                <input type="checkbox" id="theme1" name="theme1" value="Conhecimentos Gerais">
-                                <label for="theme1">Geografia</label> &nbsp; &nbsp;
-                                <input type="checkbox" id="theme1" name="theme1" value="Conhecimentos Gerais">
-                                <label for="theme1">História</label> &nbsp; &nbsp;
-                                <input type="checkbox" id="theme1" name="theme1" value="Conhecimentos Gerais">
-                                <label for="theme1">Biologia</label> &nbsp; &nbsp;
-                                <input type="checkbox" id="theme1" name="theme1" value="Conhecimentos Gerais">
-                                <label for="theme1">Física</label> &nbsp; &nbsp;
-                                <input type="checkbox" id="theme1" name="theme1" value="Conhecimentos Gerais">
-                                <label for="theme1">Química</label> &nbsp; &nbsp;
+                                <div class="filter-input-block">
+                                    <input type="checkbox" id="theme1" name="theme1" value="Conhecimentos Gerais">
+                                    <label for="theme1">Gramática</label> 
+                                </div>
+                                <div class="filter-input-block">
+                                    <input type="checkbox" id="theme1" name="theme1" value="Conhecimentos Gerais">
+                                    <label for="theme1">Literatura</label> 
+                                </div>
+                                <div class="filter-input-block">
+                                    <input type="checkbox" id="theme1" name="theme1" value="Conhecimentos Gerais">
+                                    <label for="theme1">Inglês</label> 
+                                </div>
+                                <div class="filter-input-block">
+                                    <input type="checkbox" id="theme1" name="theme1" value="Conhecimentos Gerais">
+                                    <label for="theme1">Espanhol</label> 
+                                </div>
+                                <div class="filter-input-block">
+                                    <input type="checkbox" id="theme1" name="theme1" value="Conhecimentos Gerais">
+                                    <label for="theme1">Matemática</label> 
+                                </div>
+                                <div class="filter-input-block">
+                                    <input type="checkbox" id="theme1" name="theme1" value="Conhecimentos Gerais">
+                                    <label for="theme1">Geografia</label> 
+                                </div>
+                                <div class="filter-input-block">
+                                    <input type="checkbox" id="theme1" name="theme1" value="Conhecimentos Gerais">
+                                    <label for="theme1">História</label> 
+                                </div>
+                                <div class="filter-input-block">
+                                    <input type="checkbox" id="theme1" name="theme1" value="Conhecimentos Gerais">
+                                    <label for="theme1">Biologia</label> 
+                                </div>
+                                <div class="filter-input-block">
+                                    <input type="checkbox" id="theme1" name="theme1" value="Conhecimentos Gerais">
+                                    <label for="theme1">Física</label> 
+                                </div>
+                                <div class="filter-input-block">
+                                    <input type="checkbox" id="theme1" name="theme1" value="Conhecimentos Gerais">
+                                    <label for="theme1">Química</label> 
+                                </div>
                                 
                             </div>
                         </div>
         
-                        <div class="filter-div" id="temas-especificos">
+                        <div class="filter-div" id="specific-matters">
                             <div class="filter-div-item">
                                 <h3>Temas Desse Canal</h3>
                             </div>
                             <div class="filter-div-item">
-                                <input type="checkbox" id="theme1" name="theme1" value="Conhecimentos Gerais">
-                                <label for="theme1">Brawl Stars</label> &nbsp; &nbsp;
-                                <input type="checkbox" id="theme1" name="theme1" value="Conhecimentos Gerais">
-                                <label for="theme1">Gartic</label> &nbsp; &nbsp;
-                                <input type="checkbox" id="theme1" name="theme1" value="Conhecimentos Gerais">
-                                <label for="theme1">Rocket League</label> &nbsp; &nbsp;
-                                <input type="checkbox" id="theme1" name="theme1" value="Conhecimentos Gerais">
-                                <label for="theme1">Outros</label> &nbsp; &nbsp;
+                                <div class="filter-input-block">
+                                    <input type="checkbox" id="theme1" name="theme1" value="Conhecimentos Gerais">
+                                    <label for="theme1">Brawl Stars</label> 
+                                </div>
+                                <div class="filter-input-block">
+                                    <input type="checkbox" id="theme1" name="theme1" value="Conhecimentos Gerais">
+                                    <label for="theme1">Gartic</label> 
+                                </div>
+                                <div class="filter-input-block">
+                                    <input type="checkbox" id="theme1" name="theme1" value="Conhecimentos Gerais">
+                                    <label for="theme1">Rocket League</label> 
+                                </div>
+                                <div class="filter-input-block">
+                                    <input type="checkbox" id="theme1" name="theme1" value="Conhecimentos Gerais">
+                                    <label for="theme1">Outros</label>
+                                </div>
                             </div>
                         </div>
         
@@ -106,10 +138,14 @@
                                 <h3>Tempo</h3>
                             </div>
                             <div class="filter-div-item">
-                                <input type="radio" id="dinamico" name="tempo" value="dinamico" checked onchange="handleInputsChange()">
-                                <label for="html">Dinâmico</label> &nbsp; &nbsp;
-                                <input type="radio" id="predefinido" name="tempo" value="predefinido" onchange="handleInputsChange()">
-                                <label for="html">Pré-definido</label> &nbsp; &nbsp;
+                                <div class="filter-input-block">
+                                    <input type="radio" id="dinamico" name="tempo" value="dinamico" checked onchange="handleInputsChange()">
+                                    <label for="html">Dinâmico</label>
+                                </div>
+                                <div class="filter-input-block">
+                                    <input type="radio" id="predefinido" name="tempo" value="predefinido" onchange="handleInputsChange()">
+                                    <label for="html">Pré-definido</label>
+                                </div>
                                 <div id="how-much-time">
                                     <label for="quantity">Quantos segundos?</label>
                                     <input type="number" id="quantity" name="quantity" max="120">
@@ -122,13 +158,22 @@
                                 <h3>Dificuldade</h3>
                             </div>
                             <div class="filter-div-item">
-                                <input type="checkbox" id="theme1" name="theme1" value="Conhecimentos Gerais">
-                                <label for="theme1">Fácil</label> &nbsp; &nbsp;
-                                <input type="checkbox" id="theme1" name="theme1" value="Conhecimentos Gerais">
-                                <label for="theme1">Normal</label> &nbsp; &nbsp;
-                                <input type="checkbox" id="theme1" name="theme1" value="Conhecimentos Gerais">
-                                <label for="theme1">Difícil</label> &nbsp; &nbsp;
+                                <div class="filter-input-block">
+                                    <input type="checkbox" id="theme1" name="theme1" value="Conhecimentos Gerais">
+                                    <label for="theme1">Fácil</label>
+                                </div>
+                                <div class="filter-input-block">
+                                    <input type="checkbox" id="theme1" name="theme1" value="Conhecimentos Gerais">
+                                    <label for="theme1">Normal</label> 
+                                </div>
+                                <div class="filter-input-block">
+                                    <input type="checkbox" id="theme1" name="theme1" value="Conhecimentos Gerais">
+                                    <label for="theme1">Difícil</label>
+                                </div>
                             </div>
+                        </div>
+                        <div id="button-div">
+                            <button id="start-button" onclick="window.open('questions.html', '_self');">Começar</button>
                         </div>
                     </div>
                 </section>

@@ -1,48 +1,49 @@
-CREATE TYPE difficulty AS ENUM ('easy', 'normal', 'hard');
+/* CREATE TYPE difficulty AS ENUM ('easy', 'normal', 'hard');*/
 
 
 CREATE TABLE "questions" (
   "id" SERIAL PRIMARY KEY,
   "description" varchar NOT NULL,
   "option_a" varchar NOT NULL,
-  "option_b" int,
-  "option_c",
-  "option_d",
+  "option_b" varchar NOT NULL,
+  "option_c" varchar NOT NULL,
+  "option_d" varchar NOT NULL,
+  "difficulty" int NOT NULL,
+  "subject" int NOT NULL,
+  "author" varchar NOT NULL
 );
+
+CREATE TABLE "difficulties" (
+    "id" SERIAL PRIMARY KEY,
+    "name" varchar NOT NULL
+);
+INSERT INTO "difficulties" ("name") VALUES ('easy'), ('normal'), ('hard');
+
+CREATE TABLE "question_subjects" (
+    "id" SERIAL PRIMARY KEY,
+    "subject" varchar NOT NULL,
+    "channel" varchar DEFAULT NULL,
+    "is_general_subject" boolean NOT NULL
+);
+INSERT INTO "question_subjects" ("subject", "channel", "is_general_subject") VALUES ('Gramática', DEFAULT, 'true');
+
+ALTER TABLE "questions" ADD FOREIGN KEY ("difficulty") REFERENCES "difficulties" ("id");
+ALTER TABLE "questions" ADD FOREIGN KEY ("subject") REFERENCES "question_subjects" ("id");
+
+/* INSERT */
+INSERT INTO "questions" 
+("description", "option_a", "option_b", "option_c", "option_d", "difficulty", "subject", "author") VALUES 
+('Com quantos paus se faz uma canoa?', 'Com nenhum.', 'Com 1.', 'Depende.', 'Não é feita com pau.', '1', '1', 'Femeuc');
+
+/* INNER JOIN */
+SELECT questions.id AS question_id, description, option_a, option_b, option_c, option_d, 
+difficulties.name AS difficulty, question_subjects.subject AS subject, author
+FROM questions 
+INNER JOIN difficulties ON difficulty = difficulties.id
+INNER JOIN question_subjects ON questions.subject = question_subjects.id;
 
 
 /*
-CREATE TABLE "users" (
-  "id" SERIAL PRIMARY KEY,
-  "username" varchar NOT NULL.
-  "password" varchar NOT NULL.
-  "story_checkpoint" int
-);
-
-CREATE TABLE "page" (
-  "id" SERIAL PRIMARY KEY,
-  "story" text NOT NULL,
-  "button1" int,
-  "button2" int
-);
-
-CREATE TABLE "button" (
-  "id" SERIAL PRIMARY KEY,
-  "name" varchar NOT NULL,
-  "linked_page" int
-);
-
-ALTER TABLE "users" ADD FOREIGN KEY ("story_checkpoint") REFERENCES "page" ("id");
-
-ALTER TABLE "page" ADD FOREIGN KEY ("button1") REFERENCES "button" ("id");
-
-ALTER TABLE "page" ADD FOREIGN KEY ("button2") REFERENCES "button" ("id");
-
-ALTER TABLE "button" ADD FOREIGN KEY ("linked_page") REFERENCES "page" ("id");
-
-CREATE TABLE genre ("id" SERIAL PRIMARY KEY, "name" TEXT);
-INSERT INTO genre("name") VALUES ('action'), ('adventure'), ('comedy'), ('drama'), ('fantasy'), ('horror'), ('isekai'), ('mistery'), ('romance'), ('science_fiction'), ('other');
-
 CREATE TABLE "story" (
   "id" SERIAL PRIMARY KEY,
   "genre" INTEGER REFERENCES "genre" ("id") NOT NULL,

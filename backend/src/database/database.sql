@@ -44,16 +44,6 @@ INNER JOIN question_subjects ON questions.subject = question_subjects.id;
 
 
 /*
-CREATE TABLE "story" (
-  "id" SERIAL PRIMARY KEY,
-  "genre" INTEGER REFERENCES "genre" ("id") NOT NULL,
-  "title" varchar NOT NULL,
-  "description" text NOT NULL,
-  "beginning_page" int
-);
-
-ALTER TABLE "story" ADD FOREIGN KEY ("beginning_page") REFERENCES "page" ("id");
-
 ALTER TABLE users DROP CONSTRAINT users_story_checkpoint_fkey;
 ALTER TABLE users ADD CONSTRAINT parent_id_fk FOREIGN KEY ("story_checkpoint") REFERENCES "page" ("id") ON DELETE SET NULL;
 

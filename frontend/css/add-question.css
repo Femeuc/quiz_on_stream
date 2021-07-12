@@ -7,8 +7,9 @@
 }
 
 #body {
-    background: url('../layout/fundo_1.png') no-repeat center center fixed; 
-    background-size:cover;
+    background-image: url('../layout/fundo_1.png');
+    background-size: cover;
+    background-attachment: fixed;
 }
 
 /* Page Container */
@@ -44,83 +45,71 @@
     background-color: rgb(0, 62, 186);
     padding: 70px;
     position: absolute;
+    width: 100%;
     top: -50px;
     z-index: -1;
     border-radius: 5%;
     box-shadow:  rgb(0, 50, 150) 0px 30px;
 }
 
-#main section {
+#main #add-question-container {
     background-color: rgb(0, 47, 142);
+    text-align: center;
     padding: 20px 20px;
     border-radius: 5%;
-    margin: 30px auto 50px auto;
+    margin: 30px auto 30px auto;
     box-shadow: rgb(0 40 122) 0px 30px; 
 }
+
 #main .h2 {
     color: rgb(255, 232, 118);
-    font-size: 25px;
-    text-shadow: rgb(0, 0, 0) 0px 4px;
-    font-family: monospace;
-    text-align: center;
-}
-#main .p {
-    color: white;
-    font-size: 20px;
+    font-size: 40px;
     margin-bottom: 30px;
     text-shadow: rgb(0, 0, 0) 0px 4px;
     font-family: monospace;
-    text-align: left;
-    padding: 10px;
 }
 
-#main #instructions-chat-section {
-    display: grid;
-    grid-template-columns: 50% 50%;
-}
-#main #chat-messages-div {
-    display: flex;
-    overflow: hidden;
-    background-color: rgb(0, 33, 100);
-}
-#main #latest-messages {
+#main .p {
     color: white;
-    list-style-type: none;
-    text-align: left;
-    padding: 10px;
-    font-size: 20px;
+    font-size: 30px;
+    margin-bottom: 30px;
+    text-shadow: rgb(0, 0, 0) 0px 4px;
+    word-spacing: 1ch;
     font-family: monospace;
-    flex-grow: 1;
-    height: 0;
-}
-#main #latest-messages li {
-    margin-bottom: 5px;
 }
 
-#main .filter-div {
-    display: grid;
-    grid-template-columns: 25% 75%;
+#main .input-field {
+    width: 100%;
+    display: block;
+    text-align: left;
+    padding: 5px 10px;
 }
-#main .filter-div-item{
+#main #description-input {
+    padding: 10px;
+    margin-bottom: 10px;
+}
+#main #button-align-div {
+    display: flex;
+    flex-direction: column;
+}
+#main #send-question-button {
+    padding: 5px 16px;
+    background-color: rgb(56, 188, 61);;
+    text-align: center;
+    box-shadow: rgb(24 136 20) 0px 5px;
+    border-radius: 5%;
+    border: none;
     color: white;
-    margin-top: 20px;
-    padding: 5px;
-    font-size: 20px;
+    font-weight: 900;
+    cursor: pointer;
+    width: fit-content;
+    margin: auto;
 }
-#main .filter-div-item h3 {
-    text-align: center;
+#main #options-container {
+    margin-bottom: 10px;
 }
-#main .filter-input-block {
-    display: inline-block;
-    margin-right: 10px;
-}
-#main #general-matters, #main #specific-matters, #main #how-much-time {
-    display: none;
-}
-#main input#quantity {
-    width: 60px;
-    text-align: center;
-    padding: 2px 10px;
+#main #author-input {
+    margin-top: 10px;
 }
 
 /* Main: decoration */
@@ -151,27 +140,13 @@
     right: 20px;
     bottom: 20px;
 }
+
 #main #decoration-box {
     border: rgba(0, 0, 0, .1) 3px solid;
-    width: 93%;
-    height: 92%;
+    width: 90%;
+    height: 88%;
     position: absolute;
-    top: 4%;
-    left: 3%;
+    top: 6%;
+    left: 5%;
     z-index: -1;
-}
-
-#main #button-div {text-align: center;}
-#main #start-button {
-    font-size: 20px;
-    padding: 9px 16px;
-    background-color: rgb(56, 188, 61);;
-    text-align: center;
-    box-shadow: rgb(24 136 20) 0px 8px;
-    border-radius: 5%;
-    border: none;
-    color: white;
-    font-weight: 900;
-    cursor: pointer;
-    margin-top: 20px;
 }

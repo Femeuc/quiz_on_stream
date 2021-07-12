@@ -81,36 +81,6 @@ start_button.onclick = function() {
                 subjects.push(filters_inputs[i]);
         }
     }
-
-
-    // DATABASE //
-
-    const select_from_question_subjects = `SELECT * FROM question_subjects WHERE is_general_subject = true AND channel = ${channel}`;
-    
-    const api_url = 'http://localhost:3000/questions/add';
-    
-
-    async function get_question_subjects(api_url) {
-        const general_matters_input_div = document.querySelector('#general-matters-input-div')
-
-        // Storing response
-        const response = await fetch(api_url);
-        
-        // Storing data in form of JSON
-        const data = await response.json();
-        const response = data.response;
-
-        /*
-
-        random_int = Math.floor(Math.random() * allQuestions.length);
-        random_question_id = allQuestions[random_int]["id"];
-    
-        if(localStorage['asked_questions'] != null) { askedQuestions = localStorage['username'];}
-        askedQuestions.concat(random_question_id);
-        localStorage['asked_questions'] = askedQuestions;
-        console.log(random_question_id);
-        await getQuestionById();*/
-    }
     
 /*
 
@@ -131,3 +101,46 @@ start_button.onclick = function() {
 
     window.open('questions.html', '_self');
 };
+
+const api_url = `http://localhost:3000/question_subjects?channel=${channel}`;
+get_question_subjects(api_url);
+async function get_question_subjects(api_url) {
+    const general_matters_input_div = document.querySelector('#general-matters-input-div')
+
+    // Storing response
+    const response = await fetch(api_url);
+    
+    // Storing data in form of JSON
+    const data = await response.json();
+    console.log(data.response);
+
+    for (let i = 0; i < data.response.length; i++) {
+        const filter_input_block = document.createElement("DIV");
+        const general_matters_input = document.createElement("INPUT");
+        const general_matters_label = document.createElement("LABEL");
+
+        filter_input_block.className = "filter-input-block";
+        general_matters_input.className = "filter-input";
+        general_matters_input.type = "checkbox";
+        general_matters_input.id = `${data.response[i].subject}`;
+        general_matters_label.setAttribute("for", general_matters_input.id);
+        general_matters_label.innerText = general_matters_input.id;
+        general_matters_label.style = "margin-left: 5px";
+
+        filter_input_block.appendChild(general_matters_input);
+        filter_input_block.appendChild(general_matters_label);
+        general_matters_input_div.appendChild(filter_input_block);
+    }
+}
+/*
+var btn = document.createElement("BUTTON");   // Create a <button> element
+btn.innerHTML = "CLICK ME";                   // Insert text
+document.body.appendChild(btn);  
+
+<div class="filter-div-item" id="general-matters-input-div">
+                                <div class="filter-input-block">
+                                    <input class="filter-input" type="checkbox" id="Gramática">
+                                    <label for="Gramática">Gramática</label> 
+                                </div>
+
+                            */

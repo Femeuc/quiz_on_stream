@@ -81,23 +81,9 @@ start_button.onclick = function() {
                 subjects.push(filters_inputs[i]);
         }
     }
-    
-/*
 
-<div class="filter-div-item">
-    <div class="filter-input-block">
-        <input class="filter-input" type="checkbox" id="Gramática">
-        <label for="Gramática">Gramática</label> 
-    </div>
-*/
-    
-
-
-        
-    const select_from_questions = `SELECT * FROM questions WHERE difficulty IN (${difficulties}) AND subject IN (${subjects})`;
-
-    localStorage.setItem("sql_statement", sql_statement);
-    console.log(localStorage['sql_statement']);
+    localStorage.setItem("subjects", subjects);
+    localStorage.setItem("difficulties", difficulties);
 
     window.open('questions.html', '_self');
 };
@@ -105,8 +91,6 @@ start_button.onclick = function() {
 const api_url = `http://localhost:3000/question_subjects?channel=${channel}`;
 get_question_subjects(api_url);
 async function get_question_subjects(api_url) {
-    const general_matters_input_div = document.querySelector('#general-matters-input-div')
-
     // Storing response
     const response = await fetch(api_url);
     
@@ -114,7 +98,23 @@ async function get_question_subjects(api_url) {
     const data = await response.json();
     console.log(data.response);
 
-    for (let i = 0; i < data.response.length; i++) {
+    let general_subjects = [];
+    let channel_subjects = [];
+
+    for(let i = 0; i < data.response.length; i++) {
+        if(data.response[i].is_general)
+            general_subjects.push(data.response[i]);
+        else
+            channel_subjects.push(data.response[i]);
+    }
+
+    add_general_subjects(general_subjects);
+    add_channel_subjects(channel_subjects);
+}
+
+function add_general_subjects(data) {
+    const general_matters_input_div = document.querySelector('#general-matters-input-div')
+    for (let i = 0; i < data.length; i++) {
         const filter_input_block = document.createElement("DIV");
         const general_matters_input = document.createElement("INPUT");
         const general_matters_label = document.createElement("LABEL");
@@ -122,7 +122,7 @@ async function get_question_subjects(api_url) {
         filter_input_block.className = "filter-input-block";
         general_matters_input.className = "filter-input";
         general_matters_input.type = "checkbox";
-        general_matters_input.id = `${data.response[i].subject}`;
+        general_matters_input.id = `${data[i].subject}`;
         general_matters_label.setAttribute("for", general_matters_input.id);
         general_matters_label.innerText = general_matters_input.id;
         general_matters_label.style = "margin-left: 5px";
@@ -132,15 +132,24 @@ async function get_question_subjects(api_url) {
         general_matters_input_div.appendChild(filter_input_block);
     }
 }
-/*
-var btn = document.createElement("BUTTON");   // Create a <button> element
-btn.innerHTML = "CLICK ME";                   // Insert text
-document.body.appendChild(btn);  
 
-<div class="filter-div-item" id="general-matters-input-div">
-                                <div class="filter-input-block">
-                                    <input class="filter-input" type="checkbox" id="Gramática">
-                                    <label for="Gramática">Gramática</label> 
-                                </div>
+function add_channel_subjects(data) {
+    const channel_matters_input_div = document.querySelector('#channel-matters-input-div')
+    for (let i = 0; i < data.length; i++) {
+        const filter_input_block = document.createElement("DIV");
+        const channel_matters_input = document.createElement("INPUT");
+        const channel_matters_label = document.createElement("LABEL");
 
-                            */
+        filter_input_block.className = "filter-input-block";
+        channel_matters_input.className = "filter-input";
+        channel_matters_input.type = "checkbox";
+        channel_matters_input.id = `${data[i].subject}`;
+        channel_matters_label.setAttribute("for", channel_matters_input.id);
+        channel_matters_label.innerText = channel_matters_input.id;
+        channel_matters_label.style = "margin-left: 5px";
+
+        filter_input_block.appendChild(channel_matters_input);
+        filter_input_block.appendChild(channel_matters_label);
+        channel_matters_input_div.appendChild(filter_input_block);
+    }
+}

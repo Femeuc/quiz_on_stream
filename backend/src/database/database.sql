@@ -1,17 +1,7 @@
 /* CREATE TYPE difficulty AS ENUM ('easy', 'normal', 'hard');*/
 
 
-CREATE TABLE "questions" (
-  "id" SERIAL PRIMARY KEY,
-  "description" varchar NOT NULL,
-  "option_a" varchar NOT NULL,
-  "option_b" varchar NOT NULL,
-  "option_c" varchar NOT NULL,
-  "option_d" varchar NOT NULL,
-  "difficulty" int NOT NULL,
-  "subject" int NOT NULL,
-  "author" varchar NOT NULL
-);
+CREATE TABLE "questions" ("id" SERIAL PRIMARY KEY, "description" varchar NOT NULL, "option_a" varchar NOT NULL, "option_b" varchar NOT NULL, "option_c" varchar NOT NULL, "option_d" varchar NOT NULL, "difficulty" int NOT NULL, "subject" int NOT NULL, "author" varchar NOT NULL );
 
 CREATE TABLE "difficulties" (
     "id" SERIAL PRIMARY KEY,
@@ -19,21 +9,14 @@ CREATE TABLE "difficulties" (
 );
 INSERT INTO "difficulties" ("name") VALUES ('easy'), ('normal'), ('hard');
 
-CREATE TABLE "question_subjects" (
-    "id" SERIAL PRIMARY KEY,
-    "subject" varchar NOT NULL,
-    "channel" varchar DEFAULT NULL,
-    "is_general_subject" boolean NOT NULL
-);
+CREATE TABLE "question_subjects" ("id" SERIAL PRIMARY KEY, "subject" varchar NOT NULL, "channel" varchar DEFAULT NULL, "is_general_subject" boolean NOT NULL);
 INSERT INTO "question_subjects" ("subject", "channel", "is_general_subject") VALUES ('Gramática', DEFAULT, 'true');
 
 ALTER TABLE "questions" ADD FOREIGN KEY ("difficulty") REFERENCES "difficulties" ("id");
 ALTER TABLE "questions" ADD FOREIGN KEY ("subject") REFERENCES "question_subjects" ("id");
 
 /* INSERT */
-INSERT INTO "questions" 
-("description", "option_a", "option_b", "option_c", "option_d", "difficulty", "subject", "author") VALUES 
-('Com quantos paus se faz uma canoa?', 'Com nenhum.', 'Com 1.', 'Depende.', 'Não é feita com pau.', '1', '1', 'Femeuc');
+INSERT INTO "questions" ("description", "option_a", "option_b", "option_c", "option_d", "difficulty", "subject", "author") VALUES ('Com quantos paus se faz uma canoa?', 'Com nenhum.', 'Com 1.', 'Depende.', 'Não é feita com pau.', '1', '1', 'Femeuc');
 
 /* INNER JOIN */
 SELECT questions.id AS question_id, description, option_a, option_b, option_c, option_d, 

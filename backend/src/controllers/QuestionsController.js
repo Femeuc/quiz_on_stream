@@ -17,7 +17,7 @@ module.exports = {
 
         const difficulties = adaptDifficultiesToDatabase(req.query.difficulty);
         const subjects = await adaptSubjectsToDatabase(req.query.subject);
-
+        
         const response = await pool.query("SELECT * FROM questions WHERE subject = ANY ($1) AND difficulty = ANY ($2)", [
             subjects,
             difficulties
@@ -43,6 +43,9 @@ module.exports = {
 
 
 function adaptDifficultiesToDatabase(difficulties) {
+
+    let new_difficulty_array = [];
+        
     if(typeof(difficulties) == 'object') {
         for(let i = 0; i < difficulties.length; i++){
             switch(difficulties[i]) {
@@ -57,6 +60,7 @@ function adaptDifficultiesToDatabase(difficulties) {
                     break;
             }
         }
+        new_difficulty_array = difficulties;
     } else {
         switch(difficulties) {
             case 'easy':
@@ -69,19 +73,22 @@ function adaptDifficultiesToDatabase(difficulties) {
                 difficulties = 3;
                 break;
         }
+        new_difficulty_array.push(difficulties);
     }
-    return difficulties;
+    return new_difficulty_array;
 }
 
 async function adaptSubjectsToDatabase(subjects) {
 
+    let new_subjects_array = [];
+    
     const response = await pool.query(`SELECT id FROM question_subjects WHERE subject_simplified = ANY ($1)`, [
         subjects
     ]);
 
-    let adapted_subjects = response.rows.map(function(value, index) {
+    new_subjects_array = response.rows.map(function(value, index) {
         return value.id;
     });
     
-    return (adapted_subjects);
+    return (new_subjects_array);
 }

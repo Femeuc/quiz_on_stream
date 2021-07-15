@@ -5,9 +5,10 @@ const QuestionsController = require('./controllers/QuestionsController');
 const QuestionSubjectsController = require('./controllers/QuestionSubjectsController');
 
 routes.get('/questions', QuestionsController.getAllQuestions);
-routes.get('/questions/:id', QuestionsController.getQuestionById);
+routes.get('/question/:id', QuestionsController.getQuestionById);
+routes.get('/questions/filters', QuestionsController.getQuestionsByFilters);
 routes.post('/questions', QuestionsController.createQuestion);
 
-routes.get('/question_subjects', QuestionSubjectsController.getSubjectsByChannel);
+routes.get('/questions/subjects/channel', QuestionSubjectsController.getSubjectsByChannel);
 
 module.exports = routes;

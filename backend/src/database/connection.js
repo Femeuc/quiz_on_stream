@@ -13,7 +13,7 @@ if(ENV == "prod") {
     pool = new Pool({
         host: 'localhost',
         user: 'postgres',
-        password: 'admin',
+        password: 'postgres',
         database: 'quiz_on_stream',
         port: '5432'
     });

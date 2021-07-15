@@ -25,18 +25,18 @@ client.on('message', (channel, tags, message, self) => {
 });
 
 function handleCheckboxChange() {
-    let general_matters = document.querySelector('#general-matters');
+    let general_subjects = document.querySelector('#general-matters');
     if (document.querySelector('#general-matters-checkbox').checked) {
-        general_matters.style.display = "grid";
+        general_subjects.style.display = "grid";
     } else {
-        general_matters.style.display = "none";
+        general_subjects.style.display = "none";
     }
 
-    let specific_matters = document.querySelector('#specific-matters');
+    let specific_subjects = document.querySelector('#specific-matters');
     if (document.querySelector('#specific-matters-checkbox').checked) {
-        specific_matters.style.display = "grid";
+        specific_subjects.style.display = "grid";
     } else {
-        specific_matters.style.display = "none";
+        specific_subjects.style.display = "none";
     }
 
     let how_much_time = document.querySelector('#how-much-time');
@@ -47,6 +47,74 @@ function handleCheckboxChange() {
     }
 
 }
+
+
+const api_url = `http://localhost:3000/questions/subjects/channel?name=${channel}`;
+get_question_subjects(api_url);
+async function get_question_subjects(api_url) {
+    // Storing response
+    const response = await fetch(api_url);
+    
+    // Storing data in form of JSON
+    const data = await response.json();
+    console.log(data.response);
+
+    let general_subjects = [];
+    let channel_subjects = [];
+
+    for(let i = 0; i < data.response.length; i++) {
+        if(data.response[i].is_general_subject)
+            general_subjects.push(data.response[i]);
+        else
+            channel_subjects.push(data.response[i]);
+    }
+
+    add_general_subjects(general_subjects);
+    add_channel_subjects(channel_subjects);
+}
+
+function add_general_subjects(data) {
+    const general_matters_input_div = document.querySelector('#general-matters-input-div')
+    for (let i = 0; i < data.length; i++) {
+        const filter_input_block = document.createElement("DIV");
+        const general_matters_input = document.createElement("INPUT");
+        const general_matters_label = document.createElement("LABEL");
+
+        filter_input_block.className = "filter-input-block";
+        general_matters_input.className = "filter-input";
+        general_matters_input.type = "checkbox";
+        general_matters_input.id = `${data[i].subject_simplified}`;
+        general_matters_label.setAttribute("for", general_matters_input.id);
+        general_matters_label.innerText = general_matters_input.id;
+        general_matters_label.style = "margin-left: 5px";
+
+        filter_input_block.appendChild(general_matters_input);
+        filter_input_block.appendChild(general_matters_label);
+        general_matters_input_div.appendChild(filter_input_block);
+    }
+}
+
+function add_channel_subjects(data) {
+    const channel_matters_input_div = document.querySelector('#channel-matters-input-div')
+    for (let i = 0; i < data.length; i++) {
+        const filter_input_block = document.createElement("DIV");
+        const channel_matters_input = document.createElement("INPUT");
+        const channel_matters_label = document.createElement("LABEL");
+
+        filter_input_block.className = "filter-input-block";
+        channel_matters_input.className = "filter-input";
+        channel_matters_input.type = "checkbox";
+        channel_matters_input.id = `${data[i].subject_simplified}`;
+        channel_matters_label.setAttribute("for", channel_matters_input.id);
+        channel_matters_label.innerText = channel_matters_input.id;
+        channel_matters_label.style = "margin-left: 5px";
+
+        filter_input_block.appendChild(channel_matters_input);
+        filter_input_block.appendChild(channel_matters_label);
+        channel_matters_input_div.appendChild(filter_input_block);
+    }
+}
+
 
 const start_button = document.querySelector('#start-button');
 start_button.onclick = function() {
@@ -87,69 +155,3 @@ start_button.onclick = function() {
 
     window.open('questions.html', '_self');
 };
-
-const api_url = `http://localhost:3000/question_subjects?channel=${channel}`;
-get_question_subjects(api_url);
-async function get_question_subjects(api_url) {
-    // Storing response
-    const response = await fetch(api_url);
-    
-    // Storing data in form of JSON
-    const data = await response.json();
-    console.log(data.response);
-
-    let general_subjects = [];
-    let channel_subjects = [];
-
-    for(let i = 0; i < data.response.length; i++) {
-        if(data.response[i].is_general)
-            general_subjects.push(data.response[i]);
-        else
-            channel_subjects.push(data.response[i]);
-    }
-
-    add_general_subjects(general_subjects);
-    add_channel_subjects(channel_subjects);
-}
-
-function add_general_subjects(data) {
-    const general_matters_input_div = document.querySelector('#general-matters-input-div')
-    for (let i = 0; i < data.length; i++) {
-        const filter_input_block = document.createElement("DIV");
-        const general_matters_input = document.createElement("INPUT");
-        const general_matters_label = document.createElement("LABEL");
-
-        filter_input_block.className = "filter-input-block";
-        general_matters_input.className = "filter-input";
-        general_matters_input.type = "checkbox";
-        general_matters_input.id = `${data[i].subject}`;
-        general_matters_label.setAttribute("for", general_matters_input.id);
-        general_matters_label.innerText = general_matters_input.id;
-        general_matters_label.style = "margin-left: 5px";
-
-        filter_input_block.appendChild(general_matters_input);
-        filter_input_block.appendChild(general_matters_label);
-        general_matters_input_div.appendChild(filter_input_block);
-    }
-}
-
-function add_channel_subjects(data) {
-    const channel_matters_input_div = document.querySelector('#channel-matters-input-div')
-    for (let i = 0; i < data.length; i++) {
-        const filter_input_block = document.createElement("DIV");
-        const channel_matters_input = document.createElement("INPUT");
-        const channel_matters_label = document.createElement("LABEL");
-
-        filter_input_block.className = "filter-input-block";
-        channel_matters_input.className = "filter-input";
-        channel_matters_input.type = "checkbox";
-        channel_matters_input.id = `${data[i].subject}`;
-        channel_matters_label.setAttribute("for", channel_matters_input.id);
-        channel_matters_label.innerText = channel_matters_input.id;
-        channel_matters_label.style = "margin-left: 5px";
-
-        filter_input_block.appendChild(channel_matters_input);
-        filter_input_block.appendChild(channel_matters_label);
-        channel_matters_input_div.appendChild(filter_input_block);
-    }
-}

@@ -1,7 +1,9 @@
 console.log(localStorage['difficulties']);
 console.log(localStorage['subjects']);
+const channel = localStorage['username'];
 
-const api_url = `http://localhost:3000/question_subjects?channel=${channel}`;
+const api_url = `http://localhost:3000/questions/subjects/channel?name=${channel}`;
+
 get_question_subjects(api_url);
 async function get_question_subjects(api_url) {
     // Storing response

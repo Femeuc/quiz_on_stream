@@ -3,5 +3,5 @@ const loginButton = document.querySelector('#login-button');
 
 loginButton.addEventListener('click', event => {
     window.open('filters.html', '_self');
-    localStorage['username'] = username.value; // only strings
+    localStorage['username'] = username.value.toLowerCase(); // only strings
 })

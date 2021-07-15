@@ -117,7 +117,7 @@ function add_channel_subjects(data) {
 
 
 const start_button = document.querySelector('#start-button');
-start_button.onclick = function() {
+start_button.onclick = async function() {
     const all_filters = document.querySelectorAll('.filter-input');
     const filters_inputs = [];
     for (let i = 0; i < all_filters.length; i++) {
@@ -150,8 +150,26 @@ start_button.onclick = function() {
         }
     }
 
-    localStorage.setItem("subjects", subjects);
-    localStorage.setItem("difficulties", difficulties);
+    await get_all_questions_ids(subjects, difficulties);
 
     window.open('questions.html', '_self');
 };
+
+
+async function get_all_questions_ids(subjects, difficulties) {
+    let api_url = "http://localhost:3000/questions/filters?";
+
+    for(let i = 0; i < difficulties.length; i++) {
+        api_url += "difficulty=" + difficulties[i] + "&";
+    }
+    for(let i = 0; i < subjects.length; i++) {
+        api_url += "subject=" + subjects[i] + "&";
+    }
+
+    const response = await fetch(api_url);
+    
+    // Storing data in form of JSON
+    const data = await response.json();
+    
+    localStorage.setItem("questions_ids", JSON.stringify(data.response));
+}

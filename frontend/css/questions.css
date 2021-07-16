@@ -135,22 +135,18 @@
     font-size: 20px;
 }
 #A-stats {
-    width: 100%;
     background-color: rgb(150, 255, 255);
     margin-left: 10px;
 }
 #B-stats {
-    width: 50%;
     background-color: rgb(255, 150, 255);
     margin-left: 10px;
 }
 #C-stats {
-    width: 10%;
     background-color: rgb(255, 255, 150);
     margin-left: 10px;
 }
 #D-stats {
-    width: 0%;
     background-color: rgb(220, 220, 220);
     margin-left: 10px;
 }

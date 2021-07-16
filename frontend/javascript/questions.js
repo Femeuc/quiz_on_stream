@@ -1,6 +1,7 @@
 const questions_ids = JSON.parse(localStorage['questions_ids']);
 const asked_questions_id = [];
 const players = [];
+const options_statistics = [0, 0, 0, 0];  // 0 = A, 1 = B, 2 = C, 3 = D
 let current_question = [];
 const can_repeat_question = false;
 
@@ -25,11 +26,10 @@ client.on('message', (channel, tags, message, self) => {
             if(does_player_exist(player_name)) {
                 console.log("Player exists");
                 if(!did_this_player_answer(player_name)) {
-                    console.log("This player hasn't answer yet.")
                     add_this_player_answer(player_name, message.toLowerCase());
-                } else {
-                    console.log("This player already answered.")
+                    update_statistics(message);
                 }
+
             } else {
                 console.log("Player doesn't exist, Let's create one1");
                 players.push(
@@ -39,6 +39,7 @@ client.on('message', (channel, tags, message, self) => {
                         score: 0
                     }
                 );    
+                update_statistics(message);
             }
         }
     }
@@ -99,6 +100,7 @@ function load_question() {
 function stop_question() {
     showElements();
     update_scores();
+    sort_scores();
     show_scores();
 };
 
@@ -173,6 +175,19 @@ function update_scores() {
     }
 }
 
+function sort_scores() {
+    let highest_score = -1;
+
+    for(let i = 0; i < players.length; i++) {
+
+        if(players[i].score > highest_score) {
+            highest_score = players[i].score;
+            players.unshift(players[i]);
+            players.splice(i + 1, 1);
+        }
+    }
+}
+
 function next_question() {
     reset_players_answers();
     manage_question_repetition();
@@ -215,4 +230,40 @@ function clear_scores_list(players_scores_list) {
     while (players_scores_list.firstChild) {
         players_scores_list.removeChild(players_scores_list.firstChild);
     }
+}
+
+function update_statistics(answer) {
+    switch(answer.toLowerCase()) {
+        case 'a':
+            options_statistics[0] += 1;
+            break;
+        case 'b':
+            options_statistics[1] += 1;
+            break;
+        case 'c':
+            options_statistics[2] += 1;
+            break;
+        case 'd':
+            options_statistics[3] += 1;
+            break;
+    }
+
+    const options_votes_total = options_statistics[0] + options_statistics[1] + options_statistics[2] + options_statistics[3];
+    console.log(options_votes_total);
+    document.querySelector('#A-stats').style.width = `${options_statistics[0] / options_votes_total * 100}%`;
+    document.querySelector('#B-stats').style.width = `${options_statistics[1] / options_votes_total * 100}%`;
+    document.querySelector('#C-stats').style.width = `${options_statistics[2] / options_votes_total * 100}%`;
+    document.querySelector('#D-stats').style.width = `${options_statistics[3] / options_votes_total * 100}%`;
+    console.log(options_statistics[0] / options_votes_total * 100);
+
+/*
+    <div class="flex-stats"><div class="option">A. </div> <div id="A-stats"></div></div>
+    <div class="flex-stats"><div class="option">B. </div> <div id="B-stats"></div></div>
+    <div class="flex-stats"><div class="option">C. </div> <div id="C-stats"></div></div>
+    <div class="flex-stats"><div class="option">D. </div> <div id="D-stats"></div></div>
+                    */
+}
+
+function end_quiz() {
+
 }

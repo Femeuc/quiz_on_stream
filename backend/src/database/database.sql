@@ -4,6 +4,7 @@ INSERT INTO "questions" ("description", "option_a", "option_b", "option_c", "opt
 INSERT INTO "questions" ("description", "option_a", "option_b", "option_c", "option_d", "correct_option",  "difficulty", "subject", "author") VALUES ('Pergunta teste 2?', 'Alternativa teste 2.', 'Alternativa teste 2.', 'Alternativa teste 2.', 'Alternativa teste 2.', 'd', '1', '3', 'Femeuc');
 INSERT INTO "questions" ("description", "option_a", "option_b", "option_c", "option_d", "correct_option",  "difficulty", "subject", "author") VALUES ('Pergunta teste 3?', 'Alternativa teste 3.', 'Alternativa teste 3.', 'Alternativa teste 3.', 'Alternativa teste 3.', 'a', '3', '3', 'Femeuc');
 INSERT INTO "questions" ("description", "option_a", "option_b", "option_c", "option_d", "correct_option",  "difficulty", "subject", "author") VALUES ('Pergunta teste 4?', 'Alternativa teste 4.', 'Alternativa teste 4.', 'Alternativa teste 4.', 'Alternativa teste 4.', 'b', '3', '1', 'Femeuc');
+INSERT INTO "questions" ("description", "option_a", "option_b", "option_c", "option_d", "correct_option",  "difficulty", "subject", "author") VALUES ('qual as cores do semâforo?', 'verde, amarelo, azul.', 'preto e branco', 'verde e vermelho', 'amarelo, verde e vermelho', 'd', '1', '1', 'Cibitto');
 
 CREATE TABLE "difficulties" ("id" SERIAL PRIMARY KEY, "name" varchar NOT NULL);
 INSERT INTO "difficulties" ("name") VALUES ('easy'), ('normal'), ('hard');

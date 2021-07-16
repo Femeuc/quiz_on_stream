@@ -113,7 +113,7 @@
     border-left: 1px rgba(0,0,0,0.5) solid;
     padding-left: 5px;
 }
-#main .question-score { color: rgb(56, 188, 61);}
+#main .question-score-correct { color: rgb(56, 188, 61);}
 #main .question-score-wrong { color: red;}
 #main .h3 {
     color: rgb(255, 232, 118);

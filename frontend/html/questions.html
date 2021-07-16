@@ -44,42 +44,17 @@
                 <button class="button" id="stop-button" onclick="stop_question()">Parar</button>
                 <section id="scores">
                     <h3 class="h3">Pontuação</h3>
-                    <ul>
+                    <ul id="players-scores-list">
                         <li id="player-score-header" class="player-score-li">
                             <span id="player-name-header">Nome</span> 
                             <span id="question-score-header">Questão 1</span>
                             <span id="general-score-header">Geral</span>
-                        </li>
-                        <li class="player-score-li">
-                            <span class="player-item">Lorem ipsum dolor sit</span> 
-                            <span class="question-score">+ 1</span> 
-                            <span class="general-score">50 pts.</span>
-                            </li>
-                        <li class="player-score-li">
-                            <span class="player-item">Lorem ipsum dolor sit</span> 
-                            <span class="question-score-wrong">+ 0</span> 
-                            <span class="general-score">50 pts.</span>
-                            </li>
-                        <li class="player-score-li">
-                            <span class="player-item">Lorem ipsum dolor sit</span> 
-                            <span class="question-score">+ 1</span> 
-                            <span class="general-score">50 pts.</span>
-                            </li>
-                        <li class="player-score-li">
-                            <span class="player-item">Lorem ipsum dolor sit</span> 
-                            <span class="question-score-wrong">+ 0</span> 
-                            <span class="general-score">50 pts.</span>
-                            </li>
-                        <li class="player-score-li">
-                            <span class="player-item">Lorem ipsum dolor sit</span> 
-                            <span class="question-score">+ 1</span> 
-                            <span class="general-score">50 pts.</span>
-                            </li>
+                        </li>       
                     </ul>
                 </section>
                 <section id="buttons">
                     <button class="button" id="end-quiz-button" onclick="">< Terminar</button>
-                    <button class="button" id="next-question-button" onclick="">Próxima ></button>
+                    <button class="button" id="next-question-button" onclick="next_question()">Próxima ></button>
                 </section>
             </main>
         </div>

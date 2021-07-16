@@ -3,7 +3,7 @@ const pool = require('../database/connection');
 
 module.exports = {
 
-    async getSubjectsByChannel(req, res) {
+    async getGeneralAndChannelSubjects(req, res) {
         const response = await pool.query("SELECT * FROM question_subjects WHERE is_general_subject = true or channel = $1", [
             req.query.name
         ]);

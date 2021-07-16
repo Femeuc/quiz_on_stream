@@ -34,21 +34,37 @@
                         <input id="option_c-input" type="text" placeholder="Alternativa C" class="input-field"> 
                         <input id="option_d-input" type="text" placeholder="Alternativa D" class="input-field"> 
                         </div>
-                        <select id="difficulty-input" class="input-field">
-                            <option value="volvo"></option>
-                            <option value="volvo">Fácil</option>
-                            <option value="saab">Normal</option>
-                            <option value="opel">Difícil</option>
+                        <select id="answer-input" class="input-field">
+                            <option value="empty">Resposta</option>
+                            <option value="a">A</option>
+                            <option value="b">B</option>
+                            <option value="c">C</option>
+                            <option value="d">D</option>
                         </select>
+                        <select id="difficulty-input" class="input-field">
+                            <option value="empty"></option>
+                            <option value="easy">Fácil</option>
+                            <option value="normal">Normal</option>
+                            <option value="hard">Difícil</option>
+                        </select>
+
+                        <div id="question-subject-container" >
+                            <div class="radio-input-block">
+                                <input class="radio-subject-input" type="radio" id="channel-subjects" name="subjects" value="channel" checked onchange="handleCheckboxChange()">
+                                <label for="channel-subjects" id="channel-subjects-label">Questão para Wcalixtoo</label>
+                            </div>
+                            <div class="radio-input-block">
+                                <input class="radio-subject-input" type="radio" id="general-subjects" name="subjects" value="general" onchange="handleCheckboxChange()">
+                                <label for="general-subjects" id="general-subjects-label">Questão Geral</label>
+                            </div>
+                        </div>
+                        
                         <select id="subject-input" class="input-field">
-                            <option value="volvo"></option>
-                            <option value="volvo">Gramática</option>
-                            <option value="saab">Literatura</option>
-                            <option value="opel">Matemática</option>
+                            <option value="empty"></option>
                         </select>
                         <input id="author-input" type="text" placeholder="Seu nome (autor)... " class="input-field"> <br>
                     </form>
-                    <div id="button-align-div"> <button id="send-question-button" onclick="">Adicionar</button> </div>
+                    <div id="button-align-div"> <button id="send-question-button" onclick="send_question()">Adicionar</button> </div>
                 </section>
             </main>
         </div>
@@ -57,28 +73,8 @@
     <footer>
 
     </footer>
+
+
+    <script src="../javascript/add_question.js"></script>
 </body>
 </html>
-
-<!--
-    <form>
-                        <input id="description-input" type="text" placeholder="Qual é a sua pergunta?">
-                        <input id="option_a-input" type="text" placeholder="Alternativa A"> <br>
-                        <input id="option_b-input" type="text" placeholder="Alternativa B"> <br>
-                        <input id="option_c-input" type="text" placeholder="Alternativa C"> <br>
-                        <input id="option_d-input" type="text" placeholder="Alternativa D"> <br>
-                        <select id="difficulty-input">
-                            <option value="volvo"></option>
-                            <option value="volvo">Fácil</option>
-                            <option value="saab">Normal</option>
-                            <option value="opel">Difícil</option>
-                        </select>
-                        <select id="subject-input">
-                            <option value="volvo"></option>
-                            <option value="volvo">Gramática</option>
-                            <option value="saab">Literatura</option>
-                            <option value="opel">Matemática</option>
-                        </select>
-                        <input id="author-input" type="text" placeholder="Seu nome..."> <br>
-                    </form>
--->

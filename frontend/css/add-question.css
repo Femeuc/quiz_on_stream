@@ -88,6 +88,16 @@
     padding: 10px;
     margin-bottom: 10px;
 }
+
+#main #question-subject-container {
+    background-color: white;
+    padding: 5px 10px;
+}
+#main .radio-input-block {
+    display: inline;
+    margin: 10px;
+}
+
 #main #button-align-div {
     display: flex;
     flex-direction: column;
@@ -110,6 +120,10 @@
 }
 #main #author-input {
     margin-top: 10px;
+}
+
+#main #answer-input {
+    margin-bottom: 10px;
 }
 
 /* Main: decoration */

@@ -7,8 +7,8 @@ const QuestionSubjectsController = require('./controllers/QuestionSubjectsContro
 routes.get('/questions', QuestionsController.getAllQuestions);
 routes.get('/question/:id', QuestionsController.getQuestionById);
 routes.get('/questions/filters', QuestionsController.getQuestionsByFilters);
-routes.post('/questions', QuestionsController.createQuestion);
+routes.post('/question', QuestionsController.createQuestion);
 
-routes.get('/questions/subjects/channel', QuestionSubjectsController.getSubjectsByChannel);
+routes.get('/questions/subjects/channel', QuestionSubjectsController.getGeneralAndChannelSubjects);
 
 module.exports = routes;

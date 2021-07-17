@@ -138,3 +138,40 @@
     margin-left: 10px;
     cursor: pointer;
 }
+
+
+/* Media Queries */
+@media only screen and (max-width: 1200px) {
+
+    #page-container {
+        max-width: 80%;
+        
+    }
+
+    @media only screen and (max-width: 850px) {
+        #header #header-title {
+            width: 100%;
+            border-radius: 5%;
+            text-align: center;
+        }
+
+        #page-container {
+            max-width: 100%;  
+        }
+
+        #main {
+            width: 100%;
+            padding: 50px 0px;
+            margin-top: 10px;
+            border-radius: 0%;
+        }
+
+        #main #login-section {
+            border-radius: 5%;
+        }
+
+        #main .decoration {
+            display: none;
+        }
+    }
+}

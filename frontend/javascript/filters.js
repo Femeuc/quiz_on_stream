@@ -13,7 +13,7 @@ client.on('message', (channel, tags, message, self) => {
 	//console.log(`${tags['display-name']}: ${message}`);
 
     const li = document.createElement("LI");
-    li.innerHTML = `<span style="font-weight: bold; color: yellow;"'>${tags['display-name']}</span>: &nbsp; ${message}`;
+    li.innerHTML = `<span style="font-weight: bold; color: yellow;"'>${tags['display-name']}</span>: ${message}`;
     latest_messages_ul.appendChild(li);
 
     if(latest_messages_ul.childElementCount > 7) {
@@ -148,6 +148,11 @@ start_button.onclick = async function() {
             default:
                 subjects.push(filters_inputs[i]);
         }
+    }
+
+    if(subjects.length < 1 || difficulties.length < 1) {
+        alert("Você precisa marcar pelo menos um dos filtro de abrangência e um de dificuldade. ");
+        return;
     }
 
     await get_all_questions_ids(subjects, difficulties);

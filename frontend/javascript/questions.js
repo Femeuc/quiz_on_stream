@@ -1,9 +1,10 @@
 const questions_ids = JSON.parse(localStorage['questions_ids']);
-const asked_questions_id = [];
+let question_number = 1;
 const players = [];
 const options_statistics = [0, 0, 0, 0];  // 0 = A, 1 = B, 2 = C, 3 = D
 let current_question = [];
 const can_repeat_question = false;
+let is_time_to_answer_over = false;
 
 console.log(questions_ids);
 
@@ -16,7 +17,8 @@ const client = new tmi.Client({
 client.connect();
 
 client.on('message', (channel, tags, message, self) => {
-	//console.log(`${tags['display-name']}: ${message}`);
+
+    if(is_time_to_answer_over) return;
     
     if(message.length == 1) {
         if (message.toLowerCase() == 'a' || message.toLowerCase() == 'b' 
@@ -77,7 +79,7 @@ function hideElements() {
 function showElements() {
     //document.querySelector('#statistics').style.display = "block";
     document.querySelector('#scores').style.display = "block";
-    document.querySelector('#buttons').style.display = "block";
+    document.querySelector('#buttons').style.display = "flex";
 }
 
 function load_question() {
@@ -90,6 +92,7 @@ function load_question() {
     const difficulty = current_question[0].difficulty;
     const author = current_question[0].author;*/
 
+    document.querySelector('#question-number').innerText = question_number;
     document.querySelector('#question-description').innerText = description;
     document.querySelector('#op_a').innerText = "A. " + option_a;
     document.querySelector('#op_b').innerText = "B. " + option_b;
@@ -98,6 +101,7 @@ function load_question() {
 }
 
 function stop_question() {
+    is_time_to_answer_over = true;
     showElements();
     update_scores();
     sort_scores();
@@ -192,6 +196,7 @@ function next_question() {
     reset_players_answers();
     manage_question_repetition();
     initialize_page();
+    question_number += 1;
 }
 
 function reset_players_answers() {
@@ -256,14 +261,22 @@ function update_statistics(answer) {
     document.querySelector('#D-stats').style.width = `${options_statistics[3] / options_votes_total * 100}%`;
     console.log(options_statistics[0] / options_votes_total * 100);
 
-/*
-    <div class="flex-stats"><div class="option">A. </div> <div id="A-stats"></div></div>
-    <div class="flex-stats"><div class="option">B. </div> <div id="B-stats"></div></div>
-    <div class="flex-stats"><div class="option">C. </div> <div id="C-stats"></div></div>
-    <div class="flex-stats"><div class="option">D. </div> <div id="D-stats"></div></div>
-                    */
 }
 
 function end_quiz() {
+    hideElements();
+    document.querySelector('#statistics').style.display = "none";
+    change_stop_button_action();
 
+    // TERMINAR AQUI
+    asdf
+}
+
+function change_stop_button_action() {
+    const stop_button = document.querySelector('#stop-button');
+    stop_button.innerHTML = "< Voltar";
+    stop_button.onclick = "";
+    stop_button.addEventListener('click', function() {
+        window.open('filters.html', '_self');
+    })
 }

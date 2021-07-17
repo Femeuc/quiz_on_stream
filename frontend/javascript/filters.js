@@ -155,7 +155,16 @@ start_button.onclick = async function() {
         return;
     }
 
-    await get_all_questions_ids(subjects, difficulties);
+    const response = await get_all_questions_ids(subjects, difficulties);
+
+    if(response.length < 1) {
+        alert("Nenhuma pergunta cadastrada com esses filtros.");
+        return;
+    }
+
+    localStorage.setItem("questions_ids", JSON.stringify(response));
+    localStorage.setItem('time', time);
+    localStorage.setItem('seconds', time == 'dinamic' ? 0 : document.querySelector('#quantity').value);
 
     window.open('questions.html', '_self');
 };
@@ -175,6 +184,6 @@ async function get_all_questions_ids(subjects, difficulties) {
     
     // Storing data in form of JSON
     const data = await response.json();
-    
-    localStorage.setItem("questions_ids", JSON.stringify(data.response));
+
+    return data.response;
 }

@@ -3,7 +3,7 @@ let question_number = 1;
 const players = [];
 const options_statistics = [0, 0, 0, 0];  // 0 = A, 1 = B, 2 = C, 3 = D
 let current_question = [];
-const can_repeat_question = false;
+const can_repeat_question = false;  // Assumindo que o usuário não quer repetição de questões
 let is_time_to_answer_over = false;
 
 console.log(questions_ids);
@@ -29,7 +29,7 @@ client.on('message', (channel, tags, message, self) => {
                 console.log("Player exists");
                 if(!did_this_player_answer(player_name)) {
                     add_this_player_answer(player_name, message.toLowerCase());
-                    update_statistics(message);
+                    update_statistics(player_name, message);
                 }
 
             } else {
@@ -41,7 +41,7 @@ client.on('message', (channel, tags, message, self) => {
                         score: 0
                     }
                 );    
-                update_statistics(message);
+                update_statistics(player_name, message);
             }
         }
     }
@@ -52,6 +52,13 @@ async function initialize_page() {
     hideElements();
     current_question = await get_question_by_id();
     load_question();
+
+    is_time_to_answer_over = false;
+    if(localStorage['time'] == 'predefined') {
+        manage_time(localStorage.getItem('seconds'), question_number < 2); // Depois da segunda pergunta, o segundo parâmetro 
+                                                                           // tem que ser sempre falso
+    }
+
     console.log(current_question);
 }
 
@@ -103,9 +110,12 @@ function load_question() {
 function stop_question() {
     is_time_to_answer_over = true;
     showElements();
+    highlight_correct_option();
     update_scores();
     sort_scores();
+    console.log(players);
     show_scores();
+    console.log(players);
 };
 
 function does_player_exist(player_name) {
@@ -180,23 +190,22 @@ function update_scores() {
 }
 
 function sort_scores() {
-    let highest_score = -1;
-
-    for(let i = 0; i < players.length; i++) {
-
-        if(players[i].score > highest_score) {
-            highest_score = players[i].score;
-            players.unshift(players[i]);
-            players.splice(i + 1, 1);
-        }
-    }
+    players.sort(function (a, b) {
+       return b.score - a.score;
+    })
 }
 
 function next_question() {
     reset_players_answers();
-    manage_question_repetition();
+    
+    if(manage_question_repetition()) return; // Retorna true quanod usuário esgota as questões e não deseja repetição
+
+    clear_correct_option_highlight();
+    clear_players_answers();
+
     initialize_page();
     question_number += 1;
+    reset_statistics();
 }
 
 function reset_players_answers() {
@@ -225,7 +234,8 @@ function manage_question_repetition() {
                 questions_ids.push(ids[i]);
             }
         } else {
-            console.log("Não quer repetir");
+            end_quiz();
+            return true;
         }
     }
 
@@ -237,19 +247,33 @@ function clear_scores_list(players_scores_list) {
     }
 }
 
-function update_statistics(answer) {
+function update_statistics(player_name, answer) {
+
+    // Qual questão cada jogador marcou
+    const A_players = document.querySelector('#A-players');
+    const B_players = document.querySelector('#B-players');
+    const C_players = document.querySelector('#C-players');
+    const D_players = document.querySelector('#D-players');
+
+    const player_name_span = document.createElement('SPAN');
+    player_name_span.innerText = player_name;
+    
     switch(answer.toLowerCase()) {
         case 'a':
             options_statistics[0] += 1;
+            A_players.appendChild(player_name_span);
             break;
         case 'b':
             options_statistics[1] += 1;
+            B_players.appendChild(player_name_span);
             break;
         case 'c':
             options_statistics[2] += 1;
+            C_players.appendChild(player_name_span);
             break;
         case 'd':
             options_statistics[3] += 1;
+            D_players.appendChild(player_name_span);
             break;
     }
 
@@ -259,17 +283,15 @@ function update_statistics(answer) {
     document.querySelector('#B-stats').style.width = `${options_statistics[1] / options_votes_total * 100}%`;
     document.querySelector('#C-stats').style.width = `${options_statistics[2] / options_votes_total * 100}%`;
     document.querySelector('#D-stats').style.width = `${options_statistics[3] / options_votes_total * 100}%`;
-    console.log(options_statistics[0] / options_votes_total * 100);
 
 }
 
 function end_quiz() {
     hideElements();
     document.querySelector('#statistics').style.display = "none";
+    document.querySelector('#players-answers').style.display = "none";
     change_stop_button_action();
-
-    // TERMINAR AQUI
-    asdf
+    load_final_score_screen();
 }
 
 function change_stop_button_action() {
@@ -279,4 +301,131 @@ function change_stop_button_action() {
     stop_button.addEventListener('click', function() {
         window.open('filters.html', '_self');
     })
+}
+
+function manage_time(amount_of_seconds, is_countdown_creation) {
+    if(is_time_to_answer_over) { return;}
+
+    console.log(amount_of_seconds);
+    if(is_countdown_creation) {
+        create_timer(amount_of_seconds);
+        amount_of_seconds--;
+        setTimeout(manage_time, 1000, amount_of_seconds, false)
+    }
+    else {
+        document.querySelector('#countdown').innerText = amount_of_seconds;
+        if(amount_of_seconds  < 1) {
+            stop_question();
+            return;
+        }
+        amount_of_seconds--;
+        setTimeout(manage_time, 1000, amount_of_seconds, false);
+    }   
+}
+
+function create_timer(amount_of_seconds) {
+    const time_span = document.createElement('SPAN');
+    time_span.id = 'countdown';
+    time_span.display = 'inline-block';
+    time_span.innerText = amount_of_seconds;
+    time_span.style.padding = '15px';
+    time_span.style.backgroundColor = 'rgb(0, 47, 142)';
+    time_span.style.color = 'white';
+    time_span.style.fontSize = '35px';
+    time_span.style.position = 'fixed';
+    time_span.style.right = '3%';
+    time_span.style.top = '3%';
+    time_span.style.borderRadius = '10%';
+
+    document.querySelector('#page-container').appendChild(time_span);
+}
+
+function load_final_score_screen() {
+    const final_score_heading = document.querySelector('.h2');
+    final_score_heading.innerHTML = "Pontuação final:"
+
+    const final_score_list = document.querySelector('#question-options');
+    
+
+    while (final_score_list.firstChild) {
+        final_score_list.removeChild(final_score_list.firstChild);
+    }
+
+    for(let i = 0; i < players.length; i++) {
+        const player_score_li = document.createElement('LI');
+        const player_item_span = document.createElement('SPAN');
+        const question_score_span = document.createElement('SPAN');
+        const general_score_span = document.createElement('SPAN');
+
+        player_score_li.className = "player-score-li";
+        player_item_span.className = "player-item";
+        question_score_span.className = did_player_answer_correctly(players[i].answer) ? "question-score-correct" : "question-score-wrong";
+        general_score_span.className = "general-score";
+
+        player_item_span.innerText = players[i].name;
+        question_score_span.innerText = did_player_answer_correctly(players[i].answer) ? "+ 1" : "+ 0";
+        general_score_span.innerText = players[i].score + " pts.";
+
+        final_score_list.appendChild(player_score_li);
+        player_score_li.appendChild(player_item_span);
+        player_score_li.appendChild(question_score_span);
+        player_score_li.appendChild(general_score_span);
+    }
+}
+
+function reset_statistics() {
+    options_statistics[0] = 0;
+    options_statistics[1] = 0;
+    options_statistics[2] = 0;
+    options_statistics[3] = 0;
+
+    document.querySelector('#A-stats').style.width = `0%`;
+    document.querySelector('#B-stats').style.width = `0%`;
+    document.querySelector('#C-stats').style.width = `0%`;
+    document.querySelector('#D-stats').style.width = `0%`;
+}
+
+function highlight_correct_option() {
+
+    switch(current_question[0].correct_option.toLowerCase()) {
+        case 'a':
+            document.querySelector('#op_a').style.backgroundColor = 'green';;
+            break;
+        case 'b':
+            document.querySelector('#op_b').style.backgroundColor = 'green';
+            break;
+        case 'c':
+            document.querySelector('#op_c').style.backgroundColor = 'green';
+            break;
+        case 'd':
+            document.querySelector('#op_d').style.backgroundColor = 'green';
+            break;
+    }
+}
+
+function clear_correct_option_highlight() {
+    switch(current_question[0].correct_option.toLowerCase()) {
+        case 'a':
+            document.querySelector('#op_a').style.backgroundColor = '';;
+            break;
+        case 'b':
+            document.querySelector('#op_b').style.backgroundColor = '';
+            break;
+        case 'c':
+            document.querySelector('#op_c').style.backgroundColor = '';
+            break;
+        case 'd':
+            document.querySelector('#op_d').style.backgroundColor = '';
+            break;
+    }
+}
+
+function clear_players_answers() {
+    const option_players = document.querySelectorAll('.option-players');
+    for(let i = 0; i < option_players.length; i++) {
+        option_players[i].innerHTML = "";
+        /*while (option_players.firstChild) {
+            option_players.removeChild(option_players.firstChild);
+        }*/
+    }
 }
